@@ -1,0 +1,79 @@
+#pragma once
+
+#include <string>
+#include <cmath>
+#include <math.h>
+
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:  AsTheCrowFlies
+// File:             Trip.java
+// Semester:         CS302 Spring 2015
+//
+// Author:           (your name and email address)
+// CS Login:         (your login name)
+// Lecturer's Name:  (name of your lecturer)
+// Lab Section:      (your lab section number)
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     N/A
+// Email:            N/A
+// CS Login:         N/A
+// Lecturer's Name:  N/A
+// Lab Section:      N/A
+//
+//////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//                   fully acknowledge and credit all sources of help,
+//                   other than Instructors and TAs.
+//
+// Persons:          Identify persons by name, relationship to you, and email.
+//                   Describe in detail the the ideas and help they provided.
+//
+// Online sources:   avoid web searches to solve your problems, but if you do
+//                   search, be sure to include Web URLs and description of 
+//                   of any information you find.
+//////////////////////////// 80 columns wide //////////////////////////////////
+
+/// <summary>
+/// This class creates the data management structures which allows a user to
+/// create and view trip legs which include the starting city, ending city and
+/// great circle distance between them.
+/// 
+/// 
+/// 
+/// @author Charles Small/csmall3@wisc.edu
+/// </summary>
+
+class Trip
+{
+
+private:
+	std::wstring startingCity;
+	std::wstring endingCity;
+	int minDist = 0;
+	static constexpr int EARTH_RADIUS = 6371000; // in meters
+
+	/*
+	 * 'findMinDist calculates the great circle distance between two points
+	 * based on the points longitude and latitude values
+	 */
+
+public:
+	static int findMinDist(double latEnd, double latStart, double longEnd, double longStart);
+
+	// CONSTRUCTOR
+
+	Trip(const std::wstring &startingCity, const std::wstring &endingCity, double latEnd, double latStart, double longEnd, double longStart);
+
+	// GETTERS
+
+	virtual std::wstring getStartCity();
+
+	virtual std::wstring getEndCity();
+
+	virtual int getMinDist();
+
+	virtual std::wstring printTripData();
+
+};

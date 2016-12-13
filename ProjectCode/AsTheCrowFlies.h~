@@ -1,0 +1,121 @@
+#pragma once
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include <stdexcept>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+//#include <boost/algorithm/string.hpp>
+
+//JAVA TO C++ CONVERTER NOTE: Forward class declarations:
+class Cities;
+
+///////////////////////////////////////////////////////////////////////////////
+
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Title:            Final Project
+// Files:            AsTheCrowFlies.hpp
+// Semester:         CS368 
+//
+// Author:           Charles B. Small III
+// Email:            csmall3@wisc.edu
+// CS Login:         small-iii
+// Lecturer's Name:  Gerald
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+//                   
+// Pair Partner:     N/A
+// Email:            N/A
+// CS Login:         N/A
+// Lecturer's Name:  N/A
+// Lab Section:      N/A
+//
+//////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//                   must fully acknowledge and credit those sources of help.
+//                   Instructors and TAs do not have to be credited here,
+//                   but tutors, roommates, relatives, strangers, etc do.
+//
+// Persons:          Identify persons by name, relationship to you, and email.
+//                   Describe in detail the the ideas and help they provided.
+//
+// Online sources:   avoid web searches to solve your problems, but if you do
+//                   search, be sure to include Web URLs and description of 
+//                   of any information you find.
+//////////////////////////// 80 columns wide //////////////////////////////////
+/// <summary>
+/// This class creates a virtual traveling suite which allows a user to plan and
+/// store trips as well as manage and view available cities they would like to
+/// visit
+/// 
+/// 
+/// 
+/// @author Charles Small/csmall3@wisc.edu
+/// </summary>
+
+/// <summary>
+/// This is where program execution starts.
+/// </summary>
+/// <param name="Uses"> parameter args which is not used </param>
+
+
+class AsTheCrowFlies
+{
+
+	// DATA FIELDS
+
+private:
+	
+	static std::vector<Cities*> cityList;
+	static std::vector<std::wstring> tripList;
+
+
+	/*
+	 * The method 'loadCityList' takes data from a text file and adds it to the
+	 * array list 'cityList'
+	 */
+
+public:
+	static void loadCityList(const std::string &filename);
+
+	static void addCity() throw(std::exception);
+
+
+	/* The method 'writeCitiesList' writes the list of cities from the cityList
+	 * array list to a text file */
+
+static void writeCitiesList(const std::wstring &filename);
+
+	/*
+	 * The method 'findLong' finds and gets the the longitude for any city on
+	 * the list
+	 */
+
+	static double findLong(const std::wstring &cityname);
+
+	/*
+	 * The method 'findLat' finds and gets the the latitude for any city on the
+	 * list
+	 */
+
+	static double findLat(const std::wstring &cityName);
+
+	/*
+	 * The method 'createTrip creates, stores and displays the legs of a trip
+	 * along with a total distance traveled
+	 */
+
+	static void createTrip() throw(std::exception);
+
+	/*Splits a string str into tokens with char dlm as
+	* the delimitter*/
+
+	static vector<string> split(string str, const char dlm);
+
+	static void main(vector<string> &args) throw(std::exception);
+
+};
