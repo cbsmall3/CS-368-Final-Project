@@ -11,10 +11,13 @@ using namespace std;
 
 //class Vertex;
 
-Vertex orig,dest;
+//Vertex orig; 
+Vertex dest;
+
+Vertex orig=dest;
 
 
-Edge::Edge() : origin(orig), destination(dest), distance(findMinDist(origin.getLatitude(),origin.getLatitude(),destination.getLatitude(),destination.getLongitude())) {}
+Edge::Edge() : origin(orig), destination(dest), distance(0.0) {}
 
 Edge::Edge(Vertex &orig, Vertex &dest, double dist)  {
 

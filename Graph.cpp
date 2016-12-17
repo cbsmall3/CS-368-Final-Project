@@ -27,7 +27,7 @@ Graph::Graph(const std::vector<Vertex> v) {
 
 
 //Settor for map in a graph
-//@param std::vector<Node> &other is new list of Graph Nodes
+//@param std::vector<Node> &other is new input of Graph Nodes
 
 
 
@@ -50,26 +50,26 @@ void Graph::setGraph(const Map &other) {
 void Graph::insert(const Vertex &v) {
 
      
-	//new list which will include new node plus the current list of vertices
-        std::vector <Vertex> vertexList; 
+	//new input which will include new node plus the current input of vertices
+        std::vector <Vertex> vertexinput; 
 
 	//new map with will include the new vertex
 	Map new_graph;
 
-	//New vertex added to list
-	vertexList.push_back(v);
+	//New vertex added to input
+	vertexinput.push_back(v);
 	
 
-	//Current vertices added to end of new list
+	//Current vertices added to end of new input
         for (auto it = graph.begin(); it!=graph.end(); ++it) {
 
-		vertexList.push_back(it->first);
+		vertexinput.push_back(it->first);
 
 	}
 
 
-	//New graph is created with new list of vertices
-        new_graph=makeGraph(vertexList);
+	//New graph is created with new input of vertices
+        new_graph=makeGraph(vertexinput);
 
 	
 	graph=new_graph;
@@ -104,7 +104,7 @@ void Graph::remove(const Vertex &v) {
 
 
 
-        //Removes all destinations with target Vertex on all edge lists
+        //Removes all destinations with target Vertex on all edge inputs
 
 	for(auto it = graph.begin(); it!=graph.end(); ++it) {
 
@@ -158,7 +158,7 @@ void Graph::printGraph() {
 
 	for(auto it = graph.begin(); it!=graph.end(); ++it) {
 
-	   Vertex v = it->first;
+	         Vertex v = it->first;
 
            std::cout <<"City name: "<< v.getName() << std::endl;
 
@@ -166,26 +166,28 @@ void Graph::printGraph() {
 
 	   std::vector<Edge> edges=it->second;
 
-	   for(auto itr = edges.begin(); itr!=edges.end(); ++itr) {
+	   for(int i = 0; i < edges.size(); i++) {
 
-		Vertex neighbor = itr->getDestination();
+		    Vertex neighbor = edges[i].getDestination();
+	     
+	      
+		    if(i<edges.size()-1) {
 
-		if(itr<edges.end()-1) {
-
-			std::cout<<neighbor.getName()<<", ";
+			      std::cout<<neighbor.getName()<<", ";
 
 
-	        } else {
+	        	} else {
 
-			std::cout<<neighbor.getName()<<std::endl;
+
+			  std::cout<<neighbor.getName()<<std::endl;
              
                 }
 
-		std::cout<<std::endl;
+	   
 
             }
 
-           
+		std::cout<<std::endl;           
 
 	}		
 	   
@@ -193,7 +195,7 @@ void Graph::printGraph() {
 
     
 /*Creates new vector of Graph Nodes from a vector of Vertices
-*@param vector <Vertex> input provides list of vectors to make Graph
+*@param vector <Vertex> input provides input of vectors to make Graph
 *@return vector<Node> is a graph of Nodes which are pairs of Vertices and
 * a vector of Edges
 */
@@ -210,17 +212,15 @@ void Graph::printGraph() {
 
        int n = size - 1;
 
-	if(size==0) { //error handling for empty input list
+	if(size==0) { //error handling for empty input input
 
-	   std::cerr <<"No cities on list. Please check your list." << std::endl;
+	   std::cerr <<"No cities on input. Please check your input." << std::endl;
 
 	  } else if(size==1) { //special case for only one item
 
 	    Edge edge(input[0],input[0],0.0);
 
 	    vector<Edge> edges;
-
-	    edges.resize(size);
 
 	    edges.push_back(edge);		
 
@@ -236,8 +236,6 @@ void Graph::printGraph() {
 
 	     vector<Edge> edges;
 
-	     edges.resize(size);
-
 	     edges.push_back(edge);		
 
 	     new_graph[input[0]]=edges;
@@ -252,70 +250,64 @@ void Graph::printGraph() {
         
 	std::vector<double> dist; //vector used to hold the distances between adjacent vertices
 
-	std::vector<Vertex> list; //working list of vertices in for loops below
+	
  
         dist.resize(size);
 
-        list.resize(size);
-
-	copy(input.begin(), input.end(),back_inserter(list)); //copy initial list to working list
-
+  
 	
 	for (int i = 0; i < size; i++) {
 
-	    avg=0.0; //initialize mean to zero
-	    sum_sqrd=0.0; //initialize sum squared to zero
-	    dist[0]=avg;
+            sum_sqrd=0.0;
+	    avg=0.0;
 	    std::vector<Edge> edges; //initialize vector hold edges for map value
-	    edges.resize(size);	
-	   
 	    
-	    //sort copy list so that current Vertex is at front and list is in ascending order
-  	    sort(list.begin(), list.end(), [&](const Vertex v1, const Vertex v2){return (findMinDist(input[i].getLatitude(),input[i].getLongitude(),v1.getLatitude(),v1.getLongitude())<findMinDist(input[i].getLatitude(),input[i].getLongitude(),v2.getLatitude(),v2.getLongitude()));});
+	    //if(i!=0)
+	      rotate(input.begin(),input.begin() + 1,input.end());
 	    
 	   //Gets average and precursor data for standard deviation
 
-	   for (int j = 1; j < size; j++) {
+	   for (int j = 0; j < size; j++) {
 
-		dist[j]=findMinDist(list[0].getLatitude(),list[0].getLongitude(),list[j].getLatitude(),list[j].getLongitude());		
+		dist[j]=findMinDist(input[0].getLatitude(),input[0].getLongitude(),input[j].getLatitude(),input[j].getLongitude());		
 	        avg+=dist[j]/size;//accumulates mean value
-	        sum_sqrd+=pow(dist[j],2); //accumulates sum of squared distances
+                sum_sqrd+=pow(dist[j],2);//accumulates sum squared
+
 	        
               }
 
-	      std_dev=sqrt((sum_sqrd/n)-size*(pow(avg,2))/n); //calculates the standard deviation
-	
+	      std_dev = sqrt(sum_sqrd-size*pow(avg,2))/n;
+
+	        	
                 for (int k = 1; k < size; k++) {
 	
 		     //if the index value between the origin Vertex 
 		     //...and the current Vertex is not less than 
                      //...the square root of the inverse of the... 
 		     //...relative error make new edge and add new... 
-                     //...edge to main edge list for this vertex	
+                     //...edge to main edge input for this vertex	
 
-		     if((dist[n]-dist[k]+1)/(dist[n]-dist[1]+1)>=std::sqrt(1-(std_dev/avg))) { 
-			
-			Edge edge (list[0], list[k], dist[k]);
+		   			
+			  if(abs((avg-dist[k])/std_dev) <= (size/n)+(n/size)+(std_dev/avg)) {			
 
-	     		edges.push_back(edge);
+			     Edge edge (input[0], input[k], dist[k]);
 
-		
-                     }
+	     		     edges.push_back(edge);
+
+		    } 
+                     
 
 		//before finishing the outermost for-loop create new entry in graph
 
-	        new_graph[list[0]]=edges;
-
-
 		}
 
-		
-        return new_graph;
-
-	
-     }
+    	        new_graph[input[0]]=edges;
+	        dist.clear();
+                
+           }
      
-     	
+    return new_graph;     	
+
 }	
 
     

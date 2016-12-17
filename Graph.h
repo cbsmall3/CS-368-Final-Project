@@ -15,8 +15,13 @@
 #include <utility>
 #include <algorithm>
 
+
+using namespace std;
+
+
 typedef unordered_map <Vertex,std::vector<Edge>,VertexHash,VertexEqual> Map; 
 
+	
 class Graph {
 public:
 

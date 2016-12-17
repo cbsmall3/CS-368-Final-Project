@@ -27,7 +27,8 @@ public:
     int getLatitudeAsInt() const;
     int getLongitudeAsInt() const;
     bool operator == (const Vertex &v) const;
-    bool operator != (const Vertex &v) const;	
+    bool operator != (const Vertex &v) const;
+    
     void printVertex();//prints content of Vertex
  
 private:
@@ -36,6 +37,7 @@ private:
     std::string name;
     double longitude;
     double latitude;
+    	 
 
 
     //Overloaded operators
