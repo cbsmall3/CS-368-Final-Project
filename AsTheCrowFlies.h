@@ -14,24 +14,16 @@
 #include "Edge.h"
 #include "Vertex.h"
 #include "Graph.h"
-#include "VertexHash.h"
-#include "VertexEqual.h"
+
+
 
 using namespace std;
 
-        typedef pair<double, Vertex> PQI; //mapping pair for ordered set used as priority queue
-
-	struct PQI_Comp {
-
-		bool operator()(const PQI& lhs, const PQI& rhs) const
- 		{
-			
-    			return lhs.first > rhs.first; 
- 		}
-
-	};
-
+        
 class AsTheCrowFlies {
+
+//getLatitude()
+//getLongitude()
 
 private:
 	
@@ -40,7 +32,6 @@ private:
         std::vector<Vertex> user_city_list;
         std::deque <Vertex> minPathTrip;
 	Graph mainGraph;
-	std::vector<Edge> tripList;
         static constexpr double PI = 3.141592653589793;
         static constexpr double EARTH_RADIUS = 6371000; //In meters
         
@@ -48,6 +39,9 @@ private:
 
 	//processes city data from text file and loads it to main_city_list
 	std::vector<Vertex> processCityData(const std::string &filename) throw(std::exception); 
+
+        //overloaded method processes city from text and file adds it to input vector
+	std::vector <Vertex> processCityData (const std::string &filename, std::vector<Vertex> prev_list) throw(std::exception);
 	
 	//adds a new city to the main_city_list
 	void addCity() throw(std::exception); 
@@ -65,7 +59,6 @@ private:
 
 	//The method 'createTrip creates, stores and displays the legs of a trip
 	//along with a total distance traveled
-	 
 	void createTrip() throw(std::exception);
 
 	//Splits a string str into tokens with char dlm as the delimitter
@@ -74,9 +67,16 @@ private:
         //Gets list of shortest path between two vertices in a graph
 	std::deque<Vertex> findShortestPath();
 
+        //Returns edge with a destination Vertex after comparison with the input parameteter
+	Edge getEdge(const std::vector<Edge> edges, Vertex &v);
+     
+        //Returns position of Vertex on current master list for this class
+        int getIndex(const Vertex &v);
+
+
         //Returns Haversin min distance between two points
         double findMinDistance(double latStart, double longStart, double latEnd, double longEnd);
-        
+
  	//Returns a list of Edges associated with that node
 	std::vector<Edge> findEdges(const Vertex &v) const;
      
