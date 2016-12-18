@@ -60,7 +60,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
       
       if (choice.empty() && !leave) {
         
-        cout << "\nNo value entered. Please enter a selection." << endl;
+        cout << "\nNo value entered. Please enter a selection:" << endl;
         cin.clear();
         choice.clear();
         leave = true;
@@ -69,7 +69,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
         
       } else if(choice.empty() && leave) {
         
-        cout<<"\nWould you like to exit this application? Enter 'y' if yes. " << endl;
+        cout<<"\nWould you like to exit this application? Enter 'y' if yes: " << endl;
         cin.clear();
         choice.clear();
         getline(cin,choice);
@@ -189,18 +189,11 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
           
           } //user cities REPLACES current list
 
-        printf("\n");
+        printf("\nCity list is updated. For a print-out of the new list, please use option 2\n");
         
-        for (Vertex v : main_city_list) {
-          
-          std::cout << v.getName() <<", "<< v.getLatitude() << ", " << v.getLongitude() << std::endl;
         }
-        
-        cout << endl;
-        
-      }
       
-      cout << endl;
+
       
       break;
       
@@ -229,6 +222,8 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
       break;
       
     case 5: //Allows user to input a start and stop city and then display the shortest route between them
+
+     printf("\nThis method will find the shortest path between two cities if one exists. Please follow the prompts to continue.\n");
       
      minPathTrip = findShortestPath();  	    
       
@@ -828,16 +823,11 @@ void AsTheCrowFlies::addCity() throw(std::exception) {
         myStream << s <<"\n"; 
       }
       
-    }
+     }
     
-    
-    
-  } while(!stop);  
+    } while(!stop);  
   
-  
-  
-  
-} 
+  } 
 
 
 void AsTheCrowFlies::writeCitiesList(const std::string &filename) throw(std::exception) {
@@ -966,8 +956,7 @@ void AsTheCrowFlies::createTrip() throw(std::exception) {
       }
       
       int totalDist = 0;
-      
-      
+
       for (int k = 0; k < tripList.size(); k++) {
         
         start = tripList[k].getOrigin();
@@ -1029,18 +1018,23 @@ void AsTheCrowFlies::createTrip() throw(std::exception) {
           out.open(tripFileName.c_str());
           
           if(!out.is_open()) {
-            cerr << "Couldn't write to the file" << endl;
+            cout << "Couldn't write to the file" << endl;
+            return;
           } 
+
+          int totalDist = 0;
           
           for(int k = 0; k < tripList.size(); k++) {
             
             start=tripList[k].getOrigin();
             stop=tripList[k].getDestination();
+            totalDist += tripList[k].getDistance();
             out << "From "<< start.getName() << " to " << stop.getName() <<" is "<< (tripList[k].getDistance()) * 31 / 50000 <<  " miles" << "\n";
             
-            
-          }
-          
+            }
+
+          out << "\nTotal Distance: " << totalDist << " meters (~" << totalDist * 31 / 50000 << " miles)" << "\n";
+
           done=end=true;
           
         }
@@ -1048,8 +1042,7 @@ void AsTheCrowFlies::createTrip() throw(std::exception) {
       }
       
       
-      
-    }
+      }
     
     
     else if(!end) {
