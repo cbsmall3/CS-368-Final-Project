@@ -204,8 +204,6 @@ void Graph::printGraph() {
 
 {
 
-    
-
        Map new_graph;
 
        int size  = input.size();
@@ -245,63 +243,59 @@ void Graph::printGraph() {
 	 }
  	
      
-
-	double avg, std_dev, sum_sqrd; //long values for mean, standard deviation, minimum span and sum sqaured initialized
+        double avg, std_dev, sum_sqrd; //long values for mean, standard deviation, minimum span and sum sqaured initialized
         
 	std::vector<double> dist; //vector used to hold the distances between adjacent vertices
 
-	
- 
-        dist.resize(size);
+	dist.resize(size);
 
-  
-	
-	for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
 
             sum_sqrd=0.0;
 	    avg=0.0;
 	    std::vector<Edge> edges; //initialize vector hold edges for map value
 	    
-	    //if(i!=0)
-	      rotate(input.begin(),input.begin() + 1,input.end());
+	    //Create copy of input vector
+	    std::vector<Vertex> list(input);
+
+           //sort copy that current vector of interest is at the front and is in ascending order
+           sort(list.begin(),list.end(),[&](const Vertex &v1, const Vertex &v2){return findMinDist(input[i].getLatitude(),input[i].getLongitude(),v1.getLatitude(),v1.getLongitude()) < findMinDist(input[i].getLatitude(),input[i].getLongitude(),v2.getLatitude(),v2.getLongitude());});
 	    
 	   //Gets average and precursor data for standard deviation
 
 	   for (int j = 0; j < size; j++) {
 
-		dist[j]=findMinDist(input[0].getLatitude(),input[0].getLongitude(),input[j].getLatitude(),input[j].getLongitude());		
+  	        dist[j]=findMinDist(list[0].getLatitude(),list[0].getLongitude(),list[j].getLatitude(),list[j].getLongitude());		
 	        avg+=dist[j]/size;//accumulates mean value
                 sum_sqrd+=pow(dist[j],2);//accumulates sum squared
 
-	        
-              }
+	        }
 
-	      std_dev = sqrt(sum_sqrd-size*pow(avg,2))/n;
+	      std_dev = sqrt(sum_sqrd-size*pow(avg,2))/n; //Calculate standard deviation
 
-	        	
-                for (int k = 1; k < size; k++) {
+	        for (int k = 1; k < size; k++) {
 	
 		     //if the index value between the origin Vertex 
 		     //...and the current Vertex is not less than 
                      //...the square root of the inverse of the... 
 		     //...relative error make new edge and add new... 
                      //...edge to main edge input for this vertex	
+	
 
-		   			
-			  if(abs((avg-dist[k])/std_dev) <= (size/n)+(n/size)+(std_dev/avg)) {			
+                            if(abs(dist[k]-dist[1])/(dist[n]-dist[1])<=pow((std_dev/avg),1.25)) {		
+			         
+				 Edge edge (list[0], list[k], dist[k]);
 
-			     Edge edge (input[0], input[k], dist[k]);
+	     		         edges.push_back(edge);
 
-	     		     edges.push_back(edge);
-
-		    } 
+		                 } 
                      
 
 		//before finishing the outermost for-loop create new entry in graph
 
 		}
 
-    	        new_graph[input[0]]=edges;
+                new_graph[list[0]]=edges;
 	        dist.clear();
                 
            }

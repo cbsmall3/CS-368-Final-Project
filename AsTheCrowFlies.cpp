@@ -188,6 +188,8 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
           
           
           } //user cities REPLACES current list
+
+        printf("\n");
         
         for (Vertex v : main_city_list) {
           
@@ -337,6 +339,7 @@ std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filenam
   vector <Vertex> city_data; //return value for function
   double latValue, longValue; // Holds validated latitude & longitude values //
   bool stop=false; //used to control loading of city data
+  bool done = false;
   char delim = ','; //split pt
   vector<std::string> lines; //holds pre-split lines
   string line; //each input line read from input file
@@ -346,8 +349,15 @@ std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filenam
   myStream.open(filename.c_str());
   
   if(!myStream.is_open()) {
-    cerr << "Couldn't open the text file. " << endl;
-    
+    cout << "\nCouldn't open the text file\n" << endl;
+    if (city_data.size()<1) {
+      return main_city_list;
+    } else {
+	
+	return city_data;
+
+    }
+   
   }
   
   
@@ -405,14 +415,36 @@ std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filenam
     if(!stop) {
       
       Vertex newCity(input[0],latValue,longValue);
+
+      if(done) {done = false;}
       
+      //Check if the newly entered city is on the list and if not...
       
-      city_data.push_back(newCity);
+      for (auto it = city_data.begin(); it!=city_data.end() && !done; ++it) {
+        
+        
+        if(*it == newCity) {
+          
+          done = true;
+          
+        }
+        
+      }
+      
+      //...add it to the output city list and update the graph
+      
+      if (!done) {
+        
+        city_data.push_back(newCity);
+        mainGraph.insert(newCity);
+        
+      }
+
       
       
     } else {stop=false;}
     
-  }
+ }
   
   
   return city_data;
@@ -440,9 +472,16 @@ std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filenam
   myStream.open(filename.c_str());
   
   if(!myStream.is_open()) {
-    cerr << "\nCouldn't open the text file. " << endl;
-    
-  }
+    cout << "\nCouldn't open the text file\n" << endl;
+        if (city_data.size()<1) {
+      return main_city_list;
+    } else {
+	
+	return city_data;
+
+    }  
+
+}
   
   
   while (getline(myStream,line)) {
@@ -496,7 +535,7 @@ std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filenam
       
       //Check if the newly entered city is on the list and if not...
       
-      for (auto it = main_city_list.begin(); it!=main_city_list.end() && !done; ++it) {
+      for (auto it = city_data.begin(); it!=city_data.end() && !done; ++it) {
         
         
         if(*it == newCity) {
