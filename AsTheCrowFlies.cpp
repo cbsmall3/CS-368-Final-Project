@@ -206,7 +206,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
       for (Vertex v : main_city_list)
       {
         
-        std::cout << v.getName() <<", "<< v.getLatitude() << ", " << v.getLongitude() << std::endl;
+        std::cout << v.getName() <<","<< v.getLatitude() << "," << v.getLongitude() << std::endl;
       }
       cout << endl;
       

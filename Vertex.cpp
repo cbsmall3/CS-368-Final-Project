@@ -39,15 +39,6 @@ int Vertex::getLongitudeAsInt() const {
 
 
     
- void Vertex::printVertex() {
-   
-   std::cout<<" City name: "<< getName() << "Latitude: " << getLatitude() << "Longitude: " << getLongitude() << std::endl;
-
- }
-    
-
-    
-
 bool Vertex::operator == (const Vertex &other) const {
 
           if(name==other.name && latitude==other.latitude && longitude == other.longitude) {
