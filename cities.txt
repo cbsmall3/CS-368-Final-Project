@@ -8,8 +8,6 @@ Des Moines,41.590939,-93.620866
 Lansing,42.7335,-84.5467
 Saint Paul,44.95,-93.094
 Wisconsin Dells,43.6274794,-89.77095790
-Bismarck,48.813343,-100.779004
-Pierre,44.367966,-100.336378
 Sun Prairie,43.183605,-89.213725
 Rockford,42.2711311,-89.0939952
 Machesney Park,42.3472406, -89.0389956
@@ -56,16 +54,12 @@ Burlington,42.6781,-88.2762
 Kenosha,42.5847,-87.8212
 Dodgeville,42.9603,-90.1301
 Highland,43.0467,-90.3798
-Boscobel,43.1344,-43.1344
 Fennimore,42.9836,-90.6554
 Oconomowoc,43.1117,-88.4993
 Gary,41.5934,-87.3464
 Lafayette,40.4167,-86.8753
 Terre Haute,39.4667,-87.4139
 Bloomington,39.1653,-86.5264
-
-
-
 
 
 

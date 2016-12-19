@@ -231,7 +231,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
       total = 0;
       curr = 0;
       
-      if(minPathTrip.size()>0) {
+      if(minPathTrip.size()>1) {
         
         std::cout<<"\nMinimum distance path is:\n"<<std::endl;
         
@@ -250,6 +250,10 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
         
         //std::cout << std::endl;
         
+      } else if(minPathTrip.size()==1) {
+
+	 std::cout<<"\nStart and ending city are the same.\nPlease try again using different city names for each entry.\n"<<std::endl; 
+	
       } else {std::cout<<"\nNo cities to print\n"<<endl;} 
       
       

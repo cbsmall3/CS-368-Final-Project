@@ -173,7 +173,7 @@ void Graph::printGraph() {
 	      
 		    if(i<edges.size()-1) {
 
-			      std::cout<<neighbor.getName()<<", ";
+			      std::cout<<neighbor.getName()<<",";
 
 
 	        	} else {
@@ -273,16 +273,19 @@ void Graph::printGraph() {
 
 	      std_dev = sqrt(sum_sqrd-size*pow(avg,2))/n; //Calculate standard deviation
 
+
 	        for (int k = 1; k < size; k++) {
 	
 		     //if the index value between the origin Vertex 
 		     //...and the current Vertex is not less than 
                      //...the square root of the inverse of the... 
 		     //...relative error make new edge and add new... 
-                     //...edge to main edge input for this vertex	
+                     //...edge to main edge input for this vertex
+
+
 	
 
-                            if(abs(dist[k]-dist[1])/(dist[n]-dist[1])<=pow((std_dev/avg),1.25)) {		
+                            if(dist[k]<=dist[1]+(dist[n]-dist[1]-dist[k])*(1-std_dev/avg)) {		
 			         
 				 Edge edge (list[0], list[k], dist[k]);
 
