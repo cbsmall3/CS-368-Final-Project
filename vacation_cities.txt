@@ -1,0 +1,6 @@
+California,Disneyland,33.8120918,-117.9189742
+Florida,Epcot Center,28.3774061,-81.5401091
+Wisconsin,Wisconsin Dells,43.6274794,-89.77095790
+Wisconsin,Madison,43.074722,-89.384444
+Hawaii,Honolulu,21.30895,-157.826182
+Colorado,Denver,39.7391667,-104.984167
