@@ -25,3 +25,5 @@ Friendship,43.9705,-89.8168
 Portage,43.5391,-89.4626
 Manitowoc,44.0886,-87.6576
 Sheboygan,43.7508,-87.7145
+Platteville, 42.734200, -90.478500
+Boscobel,43.1344,-90.7054
