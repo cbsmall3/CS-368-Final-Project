@@ -32,6 +32,7 @@ private:
         std::vector<Vertex> user_city_list;
         std::deque <Vertex> minPathTrip;
 	Graph mainGraph;
+        bool path_found;
         static constexpr double PI = 3.141592653589793;
         static constexpr double EARTH_RADIUS = 6371000; //In meters
         

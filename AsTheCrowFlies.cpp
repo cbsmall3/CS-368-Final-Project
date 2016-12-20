@@ -16,8 +16,8 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
   Graph new_graph(main_city_list);
   
   mainGraph.setGraph(new_graph.getGraph());
-  
-  
+
+    
   do {
     
     cout << "\nAs The Crow Flies" << endl;
@@ -184,8 +184,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
           
           mainGraph.getGraph().clear();
           
-          mainGraph.setGraph(new_graph.getGraph());
-          
+          mainGraph.setGraph(new_graph.getGraph());          
           
           } //user cities REPLACES current list
 
@@ -231,7 +230,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
       total = 0;
       curr = 0;
       
-      if(minPathTrip.size()>1) {
+      if(minPathTrip.size()>1 && path_found) { //If path is found, code below prints out details of route 
         
         std::cout<<"\nMinimum distance path is:\n"<<std::endl;
         
@@ -250,11 +249,15 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
         
         //std::cout << std::endl;
         
-      } else if(minPathTrip.size()==1) {
+      } else if(minPathTrip.size()==1) {//Error handling if user enters same start and stop city
 
 	 std::cout<<"\nStart and ending city are the same.\nPlease try again using different city names for each entry.\n"<<std::endl; 
 	
-      } else {std::cout<<"\nNo cities to print\n"<<endl;} 
+      } else if (minPathTrip.size()>=0 && !path_found) {//Error handling if there is no route after starting
+
+	  std::cout<<"\nUnable to complete path after starting. Sorry, no route :(\n"<<std::endl;
+
+      } else {std::cout<<"\nNo cities to print\n"<<endl;} //Error handling if no route to start with
       
       
       break;
@@ -1103,6 +1106,8 @@ double AsTheCrowFlies::findMinDistance(double latStart, double longStart, double
   Vertex origin, target,curr; //start Vertex and stop Vertex respectively
 
   int start,end,size;
+
+  path_found = true;
   
   
   //Prompt user to enter starting city
@@ -1164,8 +1169,7 @@ double AsTheCrowFlies::findMinDistance(double latStart, double longStart, double
           done = true;
           stop = true;
           
-          
-        }
+          }
       }
       
     }
@@ -1241,8 +1245,7 @@ double AsTheCrowFlies::findMinDistance(double latStart, double longStart, double
   } 
   
   
-  
-  if (stop) {return path;}
+if (stop) {return path;}
 
 
 size = main_city_list.size(); //So I do not have to use 'main_city_list.size()' as much
@@ -1254,12 +1257,11 @@ std::vector <std::vector <double>> dist (size, std::vector <double> (size));
 std::vector <std::vector <int>> next (size, std::vector <int> (size));
 
 
-/* The for loops below initializes next and dist 2D arrays prior to
- *  to mapping traveral. Any Vertex objects with an Edge have the
- *  distance and destination Vertex mapped to them while all
- *  other Vertices are marked as 'INFINITY' and 'null'
- */
-
+//The for loops below initializes next and dist 2D arrays prior to
+//to mapping traveral. Any Vertex objects with an Edge have the
+//distance and destination Vertex mapped to them while all
+//other Vertices are marked as 'INFINITY' and 'null'
+ 
 
 for (int i = 0; i < size; i++) {
   
@@ -1272,76 +1274,6 @@ for (int i = 0; i < size; i++) {
   
   
 }
-
-/*for (int i = 0; i < size; i++) {
-  
-  for (int j = 0; j < size; j++) {
-   
-     if(i==j) {dist[i][j]=0;}
-    
-	}
-      }
-
-dist[0][0]=0;
-
-for (int i = 0; i < size; i++) {
-  
-  for (int j = 0; j < size; j++) {
-   
-     if(i==j) {next[i][j]=j;}
-    
-	}
-      }
-
-next[0][0]=0;*/
-
-/*std::cout<<"\n\n After declaring and initializing the 2D array 'dist' looks like this:\n" << std::endl;
-
-
-for (int i = 0; i < size; i++) {
-  
-  for (int j = 0; j < size; j++) {
-
-    if(dist[i][j]!=INFINITY) {
-      
-      std::cout << " " << dist[i][j] << " ";
-      
-    } else {
-      
-      std::cout <<" "<< dist[i][j] <<" ";
-      
-    }
-
-  }
-  
-  
-  std::cout << std::endl;
-  
-}
-
-
-std::cout<<"\n and the 2D array 'next' looks like this:\n" << std::endl;
-
-for (int i = 0; i < size; i++) {
-  
-  for (int j = 0; j < size; j++) {
-    
-    if(!next[i][j]) {
-      
-      std::cout << " null ";
-      
-    } else {
-      
-      std::cout << " " << next[i][j] << " ";
-      
-    }
-    
-  }
-  
-  
-  std::cout << std::endl;
-  
-}*/
 
 for (int i = 0; i < size; i++) {
   
@@ -1364,53 +1296,10 @@ for (int i = 0; i < size; i++) {
   
   }
 
-/*std::cout<<"\n After secondary initialization the 2D array 'dist' looks like this:\n" << std::endl;
 
-
-for (int i = 0; i < size; i++) {
-  
-  for (int j = 0; j < size; j++) {
-    
-      
-      std::cout << " " << dist[i][j] << " ";
-    
-    }
-  
-  
-  std::cout << std::endl;
-  
-}
-
-
-std::cout<<"\n and the 2D array 'next' looks like this:\n" << std::endl;
-
-for (int i = 0; i < size; i++) {
-  
-  for (int j = 0; j < size; j++) {
-    
-    if(!next[i][j]) {
-      
-      std::cout << " null ";
-      
-    } else {
-      
-      std::cout << " " << next[i][j] << " ";
-      
-    }
-    
-  }
-  
-  
-  std::cout << std::endl;
-  
-}*/
-
-
-
-
- //The three nested for loops are used to check whether two adjacent Vertices have a shorter path
+//The three nested for loops are used to check whether two adjacent Vertices have a shorter path
 //between them by compairing with each and the current minimum distance and if a shorter path
- //is found, the distance and adjacent Vertices are updated
+//is found, the distance and adjacent Vertices are updated
 
 
 for (int i = 0; i < size; i++) {
@@ -1428,15 +1317,16 @@ for (int i = 0; i < size; i++) {
    }
 }
 
-/*std::cout<<"\n After shortest path traversal the 2D array 'dist' looks like this:\n" << std::endl;
+/* std::cout<<"\n After shortest path traversal the 2D array 'dist' looks like this:\n" << std::endl;
 
 
 for (int i = 0; i < size; i++) {
   
   for (int j = 0; j < size; j++) {
   
-      
-      std::cout << " " << dist[i][j] << " ";
+     if(dist[i][j]) {
+      std::cout << " " << dist[i][j] * 31/50000 << " ";
+      } else {std::cout << " x ";}
       
     }
   
@@ -1467,7 +1357,7 @@ for (int i = 0; i < size; i++) {
   
   std::cout << std::endl;
   
-}*/
+} */
 
 
 
@@ -1485,6 +1375,12 @@ path.push_back(curr); //current tracking node loaded onto end of path deque
 while (start!=end && start < size && start >= 0) { //while loops keeps adding nodes until it reaches the end node
 
        
+        if(!next[start][end]) { //If no path after search started loop is terminated by returning available path
+
+	  path_found = false;
+          return path;
+     
+        }
  
         start = next[start][end]; //current node updated
 
