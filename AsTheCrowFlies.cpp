@@ -11,8 +11,8 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
   
   bool done = false;
   
-  main_city_list=processCityData(filename);	
-  
+  main_city_list=processCityData(filename);
+ 
   Graph new_graph(main_city_list);
   
   mainGraph.setGraph(new_graph.getGraph());
@@ -459,8 +459,6 @@ std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filenam
 
 std::vector <Vertex> AsTheCrowFlies::processCityData (const std::string &filename, std::vector<Vertex> prev_list) throw(std::exception) { //REVISED
   
-  
-  printf("\nEntered add to list method\n");
   
   std::vector <Vertex> city_data = prev_list; //return value for function
   double latValue, longValue; // Holds validated latitude & longitude values //
@@ -1317,21 +1315,30 @@ for (int i = 0; i < size; i++) {
    }
 }
 
-/* std::cout<<"\n After shortest path traversal the 2D array 'dist' looks like this:\n" << std::endl;
+/*std::cout<<"\n After shortest path traversal the 2D array 'dist' looks like this:\n" << std::endl;
 
 
 for (int i = 0; i < size; i++) {
   
   for (int j = 0; j < size; j++) {
   
-     if(dist[i][j]) {
-      std::cout << " " << dist[i][j] * 31/50000 << " ";
-      } else {std::cout << " x ";}
+     if(!dist[i][j]) {
+	
+	if(i==1) {
+	
+        std::cout << "X ";	
+
+      } else if(i==size-1) {
+ 
+        std::cout << " X";
+
+      } else {std::cout << " X ";}
       
-    }
+    } else {std::cout << " " << dist[i][j] * 31/50000 << " ";}
   
-  
-  std::cout << std::endl;
+  }
+
+         std::cout << std::endl;
   
 }
 
@@ -1343,10 +1350,19 @@ for (int i = 0; i < size; i++) {
   for (int j = 0; j < size; j++) {
     
     if(!next[i][j]) {
+
+      if(i==1) {
+	
+        std::cout << "X ";	
+
+      } else if(i==size-1) {
+ 
+        std::cout << " X";
+
+      } else {std::cout << " X ";}
       
-      std::cout << " null ";
       
-    } else {
+      } else {
       
       std::cout << " " << next[i][j] << " ";
       

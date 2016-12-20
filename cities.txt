@@ -58,5 +58,35 @@ Lafayette,40.4167,-86.8753
 Terre Haute,39.4667,-87.4139
 Bloomington,39.1653,-86.5264
 Bismarck,48.813343,-100.779004
+Tappen,46.8750,-99.6365
+New Rockford,47.6800,-99.1379
+Cooperstown,47.4444,-98.1240
+Valley City,46.9233,-98.0032
+Larimore,47.9067,-97.6268
+Fargo,46.8772,-96.7898
 Pierre,44.367966,-100.336378
-
+Redfield,44.8758,-98.5187
+Huron,44.3633,-98.2143
+Chamberlain,43.8108,-99.3307
+Watertown,44.8994,-97.1151
+Brookings,44.3114,-96.7984
+Sioux Falls,43.5446,-96.7311
+Springfield,39.783250,-89.650373
+Galena,42.4167,-42.4167
+Rock Falls,41.7798,-89.6890
+Kewanee,41.2456,-89.9248
+Peoria,40.6936,-89.5890
+Pontiac,40.8809,-88.6298
+Joliet,41.5250,-88.0817
+Kankakee,41.1200,-87.8612
+Watseka,40.7761,-87.7364
+Marshal,39.3914,-87.6936
+Robinson,39.0053,-87.7392
+DeMoines,41.590939,-93.620866
+Waterloo,42.4928,-92.3426
+Grinnell,41.7434,-92.7232
+Oskaloosa,41.2917,-92.6494
+Dubuque,42.5006,-90.6646
+Clinton,41.8445,-90.1887
+Muscatine,41.4245,-91.0432
+Burlington,40.8077,-91.1129
