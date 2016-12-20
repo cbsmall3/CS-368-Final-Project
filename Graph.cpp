@@ -285,7 +285,7 @@ void Graph::printGraph() {
 
 	
 
-                            if(dist[k]<=dist[1]+(dist[n]-dist[1]-dist[k])*(1-std_dev/avg)) {		
+                            if(dist[k]<=dist[1]+(dist[n]-dist[1])*(std_dev/avg)+avg-10*std_dev) {		
 			         
 				 Edge edge (list[0], list[k], dist[k]);
 
