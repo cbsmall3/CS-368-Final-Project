@@ -55,8 +55,7 @@ private:
 	
 	//The method 'writeCitiesList' writes the list of cities from the cityList
 	//array list to a text file 
-        
-	void writeCitiesList(const std::string &filename) throw(std::exception);
+        void writeCitiesList(const std::string &filename) throw(std::exception);
 
 	//The method 'createTrip creates, stores and displays the legs of a trip
 	//along with a total distance traveled
@@ -68,19 +67,11 @@ private:
         //Gets list of shortest path between two vertices in a graph
 	std::deque<Vertex> findShortestPath();
 
-        //Returns edge with a destination Vertex after comparison with the input parameteter
-	Edge getEdge(const std::vector<Edge> edges, Vertex &v);
-     
         //Returns position of Vertex on current master list for this class
         int getIndex(const Vertex &v);
 
-
         //Returns Haversin min distance between two points
-        double findMinDistance(double latStart, double longStart, double latEnd, double longEnd);
-
- 	//Returns a list of Edges associated with that node
-	std::vector<Edge> findEdges(const Vertex &v) const;
-     
+        double findMinDistance(double latStart, double longStart, double latEnd, double longEnd); 	
 
 
 public:

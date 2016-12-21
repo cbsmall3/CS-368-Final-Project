@@ -243,11 +243,10 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
           
           total+=curr;
         }
-        //std::cout << std::endl;
+
         
         std::cout<<"\nTotal Distance for the Trip is:\n"<< total << " miles." << std::endl;
         
-        //std::cout << std::endl;
         
       } else if(minPathTrip.size()==1) {//Error handling if user enters same start and stop city
 
@@ -255,7 +254,7 @@ int AsTheCrowFlies::menu (char* filename) throw(std::exception) { //REVISED
 	
       } else if (minPathTrip.size()>=0 && !path_found) {//Error handling if there is no route after starting
 
-	  std::cout<<"\nUnable to complete path after starting. Sorry, no route :(\n"<<std::endl;
+         std::cout<<"\nUnable to complete path after starting. Sorry, no route :(\n"<<std::endl;
 
       } else {std::cout<<"\nNo cities to print\n"<<endl;} //Error handling if no route to start with
       
@@ -1072,8 +1071,6 @@ void AsTheCrowFlies::createTrip() throw(std::exception) {
 } 
 
 
-
-
 double AsTheCrowFlies::findMinDistance(double latStart, double longStart, double latEnd, double longEnd) { //REVISED
   
   
@@ -1275,8 +1272,8 @@ for (int i = 0; i < size; i++) {
 
 for (int i = 0; i < size; i++) {
   
-  std::vector<Edge> edges = findEdges(main_city_list[i]);
-  
+  std::vector<Edge> edges = mainGraph.getGraph()[main_city_list[i]]; 
+
   for (int j = 0; j < size; j++) {
     
     for(auto it = edges.begin(); it!=edges.end(); ++it) {
@@ -1293,6 +1290,7 @@ for (int i = 0; i < size; i++) {
     }
   
   }
+
 
 
 //The three nested for loops are used to check whether two adjacent Vertices have a shorter path
@@ -1320,6 +1318,8 @@ for (int i = 0; i < size; i++) {
 
 for (int i = 0; i < size; i++) {
   
+  std::cout<<"\nStart of line "<< i << " (" << main_city_list[i].getName() <<")" << std::endl;
+  
   for (int j = 0; j < size; j++) {
   
      if(!dist[i][j]) {
@@ -1338,17 +1338,19 @@ for (int i = 0; i < size; i++) {
   
   }
 
-         std::cout << std::endl;
+  std::cout<<"\nEnd of line "<< i << std::endl;
   
-}
+} 
 
 
 std::cout<<"\n and the 2D array 'next' looks like this:\n" << std::endl;
 
 for (int i = 0; i < size; i++) {
+
+  std::cout<<"\nStart of line "<< i << " (" << main_city_list[i].getName() <<")" << std::endl;
   
   for (int j = 0; j < size; j++) {
-    
+
     if(!next[i][j]) {
 
       if(i==1) {
@@ -1370,8 +1372,7 @@ for (int i = 0; i < size; i++) {
     
   }
   
-  
-  std::cout << std::endl;
+  std::cout<<"\nEnd of line "<< i << std::endl;
   
 } */
 
@@ -1424,29 +1425,5 @@ return path;
 
 
 
-std::vector<Edge> AsTheCrowFlies::findEdges(const Vertex &v) const {
-  
-  
-  Map map = mainGraph.getGraph();
-  
-  std::vector<Edge> edges;
-  
-  bool done = false;
-  
-  for (auto it = map.begin(); it!=map.end() && !done; ++it) {
-    
-    if(it->first==v) {
-      
-      edges=it->second;
-      
-      done = true;
-      
-    }
-    
-  }
-  
-  return edges;
-  
-  
-}
+
 
